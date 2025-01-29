@@ -29,22 +29,12 @@ function divide(num1, num2){
     return num1 / num2
 }
 
-function operate(){
-    if(firstInput && secondInput &! secondOperator){
-     console.log('1st input, second input NO 2nd operator')
-     switch (firstOperator) {
-        case 'plus':
-            result = add(Number(firstInput), Number(secondInput))
-            displayValue = result
-            break;
-     
-        default:
-            break;
-     }
-    }
+
+
+function afterOperation(result){
+    firstPress = true;
+    display.textContent = result
 }
-
-
 function allClear(){
     firstInput = null
     secondInput = null
@@ -70,21 +60,45 @@ function setDisplay(value){
 }
 
 function setOperator(operator){
-
+    if(firstOperator==null){
+        console.log("first "+operator+" operator")
+        firstOperator=operator
+    }else if (firstOperator!=null){
+        console.log("Second "+operator+" operator")
+        secondOperator=operator
+    }
 }
 
 function setInput(content){
-    //If action not pressed
-    if(firstOperator==null){
-        console.log("First Operator Null and content: " +content)
+    //If both first and 2nd operator are null
+    if(firstInput==null){
         firstInput=content
+    }else if(secondInput==null){
+        secondInput=content
+    }
+}
+function operate(){
+    if(firstInput && secondInput && secondOperator==null){
+     console.log('1st input, second input NO 2nd operator')
+     switch (firstOperator) {
+        case 'plus':
+            result = add(Number(firstInput), Number(secondInput))
+            afterOperation(result)
+            break;
+        case 'multiply':
+            result = multiply(Number(firstInput),Number(secondInput))
+            afterOperation(result)
+        default:
+            break;
+     }
+    }else if(firstInput && secondInput && secondOperator!=null){
+        
     }
 }
 
 buttonsArray.forEach(function(elem){
     elem.addEventListener("click", function(){
         if(elem.classList.contains('number')){
-            console.log("Clicked number: " + elem.value)
             setDisplay(elem.value)   
         }
 
@@ -95,9 +109,9 @@ buttonsArray.forEach(function(elem){
 
         if(elem.id == "plus"){
             firstPress=true
-            console.log("PLUS Operator, content of calculator is: "+ display.textContent)
-            setOperator("plus")
+            console.log("PLUS. content of calculator is: "+ display.textContent)
             setInput(display.textContent)
+            setOperator(elem.id)
             clearDisplay()
         }
 
@@ -106,6 +120,11 @@ buttonsArray.forEach(function(elem){
         }
 
         if(elem.id == "multiply"){
+            firstPress=true
+            console.log("MULTIPLY. content of calculator is: "+ display.textContent)
+            setInput(display.textContent)
+            setOperator(elem.id)
+            clearDisplay()
         }
         if(elem.id == "divide"){
         }
