@@ -1,7 +1,10 @@
 
 let firstInput = null;
 let secondInput = null;
-let operator = null;
+let firstOperator = null;
+let secondOperator = null;
+let displayValue = 0;
+let result = null;
 //add = () =>{}
 function add(num1, num2){
     return num1+num2
@@ -22,16 +25,42 @@ function divide(num1, num2){
     return num1 / num2
 }
 
-function operate(num1,operator,num2){
-    if(operator=='plus'){
-         return add(num1,num2)
-    }else if (operator=='-'){
-        return subtract(num1,num2)
-    }else if (operator == '*'){
-        return multiply(num1,num2)
-    }else if (operator == '/'){
-        return divide(num1,num2)
+function operate(operator){
+
+}
+
+
+function allClear(){
+    firstInput = null
+    secondInput = null
+    firstOperator = null;
+    secondOperator = null;
+}
+
+function clearDisplay(){
+    display.textContent=0
+}
+let buttonsArray = document.querySelectorAll("button")
+let display = document.querySelector("#display")
+
+console.table(buttonsArray)
+console.table(display)
+
+function setDisplay(value){
+    if(display.textContent == firstInput){
+        display.textContent=value
+    }else{
+        display.textContent+=value
     }
+}
+
+function setOperator(operator){
+    if(firstOperator==null && secondOperator==null){
+        firstOperator=operator
+    }else if(firstOperator!=null && secondOperator==null){
+        secondOperator=operator
+    }
+
 }
 function setInput(displayContent){
     if(firstInput==null){
@@ -43,25 +72,14 @@ function setInput(displayContent){
     }
 }
 
-function clear(){
-    firstInput=null
-    secondInput=null
-    operator=null
-}
-let buttonsArray = document.querySelectorAll("button")
-let display = document.querySelector("#display")
-
-console.table(buttonsArray)
-console.table(display)
-
 buttonsArray.forEach(function(elem){
     elem.addEventListener("click", function(){
         if(elem.id == "zero"){
-            display.textContent+=0
+            setDisplay(0)
         }
 
         if(elem.id == "one"){
-            display.textContent+=1
+            setDisplay(1)
         }
 
         if(elem.id == "two"){
@@ -97,9 +115,7 @@ buttonsArray.forEach(function(elem){
         }
 
         if(elem.id == "equals"){
-            let answer = operate(firstInput,operator,secondInput)
-            display.textContent = answer
-            clear()
+
         }
 
         if(elem.id == "clear"){
@@ -108,8 +124,8 @@ buttonsArray.forEach(function(elem){
         }
 
         if(elem.id == "plus"){
-            operator = "plus"
             setInput(display.textContent)
+            setOperator("plus")
         }
 
         if(elem.id == "minus"){
