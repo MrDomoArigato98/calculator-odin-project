@@ -5,41 +5,42 @@ let firstOperator = null;
 let secondOperator = null;
 let displayValue = 0;
 let result = null;
-let firstPress = true;
+let isPressed = false;
 let buttonsArray = document.querySelectorAll("button")
 let display = document.querySelector("#display")
 
+
 //add = () =>{}
-function add(num1, num2){
-    return num1+num2
-}
 
-//subtract = () => {}
-function subtract(num1,num2){
-    return num1-num2
-}
-
-//multiply = () => {}
-function multiply(num1,num2){
-    return num1*num2
-}
-
-//divide = () => {}
-function divide(num1, num2){
-    return num1 / num2
+function operate(num1,num2, operator){
+    switch (operator) {
+        case '+':
+            return num1+num2
+            break;
+        case '*':
+            return num1-num2
+            break;
+        case '-':
+            return num1-num2
+            break;
+        case '/':
+            return (num1/num2)
+            break;
 }
 
 function setDisplay(value){
-    if(displayValue==0){
-        display.textContent=value
-        firstPress=false
-    }else display.textContent+=value
-    
+
 }
 
+function setOperator(operator){
+
+}
+
+function setEquals(){
+}
 
 function operate(){
-   
+
 }
 
 buttonsArray.forEach(function(elem){
@@ -49,10 +50,12 @@ buttonsArray.forEach(function(elem){
         }
 
         if(elem.id == "equals"){
+            setEquals()
+            operate()
         }
 
         if(elem.id == "plus"){
-            
+            setOperator("+")
         }
 
         if(elem.id == "minus"){
@@ -85,11 +88,10 @@ function allClear(){
     firstOperator = null;
     secondOperator = null;
     result = null;
-    display.textContent=0
-    firstPress=true
+    displayValue = 0
 }
 
 function clearDisplay(){
-    firstPress=true
     display.textContent=0
+    displayValue = 0
 }
