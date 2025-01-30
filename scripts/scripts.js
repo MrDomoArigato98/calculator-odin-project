@@ -3,11 +3,11 @@ let firstInput = null;
 let secondInput = null;
 let firstOperator = null;
 let secondOperator = null;
-let displayValue = 0;
+let displayValue = '0';
 let result = null;
 let isPressed = false;
 let buttonsArray = document.querySelectorAll("button")
-let display = document.querySelector("#display")
+
 
 
 //add = () =>{}
@@ -34,25 +34,38 @@ function operate(num1,num2, operator){
             
 }
 
-function setDisplay(value){
 
+function setInput(number){
+    if(firstOperator===null){
+        if(displayValue===0 || displayValue ==='0'){
+            displayValue = number;
+        }else if(displayValue = firstInput){
+            displayValue = number
+        }else{
+            displayValue+=number
+        }
+    }else {
+        if(displayValue===firstInput){
+            displayValue = number
+        }else{
+            display+=number
+        }
+    }
 }
 
-function setOperator(operator){
-
+function setDisplay(){
+    const display = document.querySelector("#display")
+    display.textContent = displayValue;
+    if(displayValue.length>9){
+    }
 }
-
-function setEquals(){
-}
-
-function operate(){
-
-}
+setDisplay();
 
 buttonsArray.forEach(function(elem){
     elem.addEventListener("click", function(){
         if(elem.classList.contains('number')){
-            setDisplay(elem.value)
+            setInput(elem.value)
+            setDisplay();
         }
 
         if(elem.id == "equals"){
