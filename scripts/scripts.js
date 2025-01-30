@@ -24,8 +24,14 @@ function operate(num1,num2, operator){
             return num1-num2
             break;
         case '/':
-            return (num1/num2)
-            break;
+            if(num2==0){
+                return "wtf"
+                break;
+            }else{
+                return (num1/num2)
+                break;
+            }
+            
 }
 
 function setDisplay(value){
