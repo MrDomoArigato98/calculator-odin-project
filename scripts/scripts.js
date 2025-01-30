@@ -3,7 +3,7 @@ let firstInput = null;
 let secondInput = null;
 let firstOperator = null;
 let secondOperator = null;
-let displayValue = '0';
+let displayValue = 0;
 let result = null;
 let isPressed = false;
 let buttonsArray = document.querySelectorAll("button")
@@ -13,6 +13,8 @@ let buttonsArray = document.querySelectorAll("button")
 //add = () =>{}
 
 function operate(num1,num2, operator){
+    Number(num1)
+    Number(num2)
     switch (operator) {
         case '+':
             return num1+num2
@@ -31,15 +33,16 @@ function operate(num1,num2, operator){
                 return (num1/num2)
                 break;
             }
-            
+        }
 }
 
 
 function setInput(number){
+    //If the first operator isn't set (Basically first calculation).
     if(firstOperator===null){
         if(displayValue===0 || displayValue ==='0'){
             displayValue = number;
-        }else if(displayValue = firstInput){
+        }else if(displayValue == firstInput){
             displayValue = number
         }else{
             displayValue+=number
@@ -53,6 +56,14 @@ function setInput(number){
     }
 }
 
+function setOperator(operator){
+    if(firstOperator!=null && secondOperator === null){
+        secondOperator = operator
+        secondInput = displayValue
+        result = operate(firstInput,secondInput,firstOperator)
+
+    }
+}
 function setDisplay(){
     const display = document.querySelector("#display")
     display.textContent = displayValue;
@@ -78,14 +89,15 @@ buttonsArray.forEach(function(elem){
         }
 
         if(elem.id == "minus"){
-
+            setOperator("-")
         }
 
         if(elem.id == "multiply"){
-
+            setOperator("*")
         }
         
         if(elem.id == "divide"){
+            setOperator("/")
         }
 
         if(elem.id == "del"){
