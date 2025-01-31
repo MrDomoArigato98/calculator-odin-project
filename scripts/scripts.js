@@ -51,7 +51,7 @@ function setInput(number){
         if(displayValue===firstInput){
             displayValue = number
         }else{
-            display+=number
+            displayValue+=number
         }
     }
 }
@@ -61,7 +61,22 @@ function setOperator(operator){
         secondOperator = operator
         secondInput = displayValue
         result = operate(firstInput,secondInput,firstOperator)
+        displayValue = result
+        firstInput = displayValue
+        result = null
+    }else if(firstInput = null && secondOperator != null){
 
+    
+        secondInput = displayValue
+        result = operate(firstInput,secondInput,firstOperator)
+        secondOperator = operator
+        displayValue = result
+        firstInput = displayValue
+        result = null
+
+    }else {
+        firstOperator = operator
+        firstInput = displayValue
     }
 }
 function setDisplay(){
