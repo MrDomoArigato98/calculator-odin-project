@@ -38,7 +38,6 @@ function operate(num1,num2, operator){
 
 
 function setInput(number){
-    //If the first operator isn't set (Basically first calculation).
     if(firstOperator===null){
         if(displayValue===0 || displayValue ==='0'){
             displayValue = number;
