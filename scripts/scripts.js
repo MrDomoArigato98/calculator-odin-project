@@ -13,8 +13,8 @@ let buttonsArray = document.querySelectorAll("button")
 //add = () =>{}
 
 function operate(num1,num2, operator){
-    Number(num1)
-    Number(num2)
+    num1 = Number(num1)
+    num2 = Number(num2)
     switch (operator) {
         case '+':
             return num1+num2
@@ -111,10 +111,22 @@ function setEquals(){
         }
     }
 }
+
+function setDecimal(decimal){
+    if(displayValue == firstInput || displayValue == secondInput){
+        displayValue = '0';
+        displayValue += decimal;
+    }else if(!displayValue.includes(decimal)){
+        displayValue+=decimal
+    }
+}
 function setDisplay(){
     const display = document.querySelector("#display")
     display.textContent = displayValue;
-    if(displayValue.length>9){
+
+    if(display.textContent.length > 9) {
+        console.log("beep")
+        display.textContent = display.textContent.substring(0, 9);
     }
 }
 setDisplay();
@@ -128,7 +140,6 @@ buttonsArray.forEach(function(elem){
 
         if(elem.id == "equals"){
             setEquals()
-            operate()
             setDisplay()
         }
 
@@ -154,6 +165,11 @@ buttonsArray.forEach(function(elem){
 
         if(elem.id == "del"){
             clearDisplay()
+            setDisplay()
+        }
+
+        if(elem.id == "decimal"){
+            setDecimal('.')
             setDisplay()
         }
 
