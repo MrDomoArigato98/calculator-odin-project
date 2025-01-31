@@ -20,7 +20,7 @@ function operate(num1,num2, operator){
             return num1+num2
             break;
         case '*':
-            return num1-num2
+            return num1*num2
             break;
         case '-':
             return num1-num2
@@ -79,6 +79,38 @@ function setOperator(operator){
         firstInput = displayValue
     }
 }
+
+function setEquals(){
+     if(firstOperator === null) {
+        displayValue = displayValue;
+    } else if(secondOperator != null) {
+        secondInput = displayValue;
+        result = operate(firstInput,secondInput, secondOperator);
+        if(result === 'wtf') {
+            displayValue = 'wtf';
+        } else {
+            displayValue = result
+            firstInput = displayValue;
+            secondInput = null;
+            firstOperator = null;
+            secondOperator = null;
+            result = null;
+        }
+    } else {
+        secondInput = displayValue;
+        result = operate(firstInput, secondInput, firstOperator);
+        if(result === 'wtf') {
+            displayValue = 'wtf';
+        } else {
+            displayValue = result
+            firstInput = displayValue;
+            secondInput = null;
+            firstOperator = null;
+            secondOperator = null;
+            result = null;
+        }
+    }
+}
 function setDisplay(){
     const display = document.querySelector("#display")
     display.textContent = displayValue;
@@ -97,31 +129,37 @@ buttonsArray.forEach(function(elem){
         if(elem.id == "equals"){
             setEquals()
             operate()
+            setDisplay()
         }
 
         if(elem.id == "plus"){
             setOperator("+")
+            setDisplay()
         }
 
         if(elem.id == "minus"){
             setOperator("-")
+            setDisplay()
         }
 
         if(elem.id == "multiply"){
             setOperator("*")
+            setDisplay()
         }
         
         if(elem.id == "divide"){
             setOperator("/")
+            setDisplay()
         }
 
         if(elem.id == "del"){
             clearDisplay()
+            setDisplay()
         }
 
         if(elem.id == "clear"){
             allClear()
-            display.textContent=0
+            setDisplay()
         }
     })
 })
